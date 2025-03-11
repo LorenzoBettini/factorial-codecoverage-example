@@ -3,15 +3,9 @@ package factorial.example;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FactorialTest {
-
-	@SuppressWarnings("deprecation")
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	private Factorial factorial;
 
@@ -47,8 +41,8 @@ public class FactorialTest {
 
 	@Test
 	public void testNegativeInput() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Negative input: -1");
-		factorial.compute(-1);
+		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
+				() -> factorial.compute(-1));
+		assertEquals("Negative input: -1", thrown.getMessage());
 	}
 }
